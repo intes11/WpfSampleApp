@@ -1,0 +1,31 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfSampleApp"
+        xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+    xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars" xmlns:ViewModels="clr-namespace:WpfSampleApp.ViewModels" x:Class="WpfSampleApp.MainWindow"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="390" Width="540">
+    <Window.DataContext>
+        <ViewModels:ProductsViewModel/>
+    </Window.DataContext>
+
+
+
+    <Grid>
+        <dxg:GridControl x:Name="grid" AutoGenerateColumns="AddNew" EnableSmartColumnsGeneration="True" Margin="0,40,0,0" ItemsSource="{Binding ProductsTable}">
+            <dxg:GridControl.View>
+                <dxg:TableView AllowPerPixelScrolling="True" ShowTotalSummary="True">
+                    <dxg:TableView.RowCellMenuCustomizations>
+                        <dxb:BarButtonItem x:Name="deleteRowItem" Content="Delete" Command="{x:Static dxg:GridCommands.DeleteFocusedRow}" />
+                        <dxb:BarButtonItem x:Name="addRowItem" Content="Add" Command="{x:Static dxg:GridCommands.AddNewRow}" />
+                    </dxg:TableView.RowCellMenuCustomizations>
+                </dxg:TableView>
+            </dxg:GridControl.View>
+            <dxg:GridColumn FieldName="Id" Visible="False"/>
+        </dxg:GridControl>
+        <Label Margin="10,10,10,320" Content="Click the right mouse button anywhere on the grid to Add or Delete rows." />
+    </Grid>
+</Window>
